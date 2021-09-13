@@ -1,0 +1,29 @@
+extends layout
+
+block content
+    div.container
+        div.row
+            h2 Изменение уровня #{props.title}.
+            hr.my-4
+            form(action='/lvls/saveLvl/' method='POST')
+                input(type="hidden" name="width" value=props.width)
+                input(type="hidden" name="height" value=props.height)
+                input(type="hidden" name="title" value=props.title)
+                input(type="hidden" name="filename" value=file)
+                each item, col in data
+                    div(class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3")
+                        each i, row in item
+                           div.col
+                               div(class="p-3 border bg-light")
+                                   select(class="form-select form-select-sm" aria-label=".form-select-lg example" name='cellType'+col+row)
+                                        each val in cellTypes
+                                            if i.type === val
+                                                option(selected value=val) #{val}
+                                            else
+                                                option(value=val) #{val}
+                                   input(type="color" name='color'+col+row class="form-control form-control-color" value=i.value)
+                button(type="submit" class="btn btn-primary") Сохранить уровень
+        div.row
+            hr.my-4
+            div.col-sm
+                button(type="button" class="btn btn-secondary" onclick="window.location.href = '/lvls';") Назад

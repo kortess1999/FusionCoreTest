@@ -1,0 +1,39 @@
+extends layout
+block content
+    body
+        div.container
+            div.row
+                div.col
+                    h1 Изменение параметров уровней
+                hr.my-4
+            div.row
+                h2 Создание уровня
+                form(action='/lvls/create' method='POST')
+                    div(class="mb-3")
+                        label(for="lvlFileName" class="form-label") Название файла
+                        input(type="text" class="form-control" id="lvlFileName" name="lvlFileName" aria-describedby="FileName")
+                        div(id="FileName" class="form-text") Индивидуальное название файла уровня.
+                    div(class="mb-3")
+                        label(for="lvlName" class="form-label") Отображаемое пользователю название уровня
+                        input(type="text" class="form-control" name="lvlName" id="lvlName")
+                    div(class="mb-3")
+                        label(class="form-label" for="width") Ширина уровня
+                        input(type="number" class="form-control" name="width" id="width")
+                    div(class="mb-3")
+                        label(class="form-label" for="height") Высота уровня
+                        input(type="number" class="form-control" name="height" id="height")
+                    button(type="submit" class="btn btn-primary") Создать уровень
+            div.row
+                hr.my-4
+                h2 Удаление уровня
+                form(action='/lvls/delete' method='POST')
+                    div(class="mb-3")
+                        select(class="form-select form-select-sm" aria-label=".form-select-lg example" name='lvlName')
+                            each val in lvls
+                                option(selected value=val) #{val}
+                    button(type="submit" class="btn btn-primary") Удалить уровень
+            div.row
+                hr.my-4
+                div.col-sm
+                    button(type="button" class="btn btn-secondary" onclick="window.location.href = '/lvls';") Назад
+

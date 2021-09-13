@@ -1,0 +1,8 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+  h2 Список уровней:
+  for lvl in lvls
+    a(href = "/change?lvl="+lvl) #{lvl}
